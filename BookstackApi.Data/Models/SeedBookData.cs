@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BookstackApi.Data.Models
 {
-    class SeedBookData
+    public class SeedBookData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
