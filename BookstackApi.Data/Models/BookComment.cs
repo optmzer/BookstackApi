@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BookstackApi.Models
+namespace BookstackApi.Data.Models
 {
     public class BookComment
     {

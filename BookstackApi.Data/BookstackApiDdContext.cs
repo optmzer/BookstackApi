@@ -1,5 +1,4 @@
 ﻿using BookstackApi.Data.Models;
-using BookstackApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookstackApi.Data

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace BookstackApi.Models
+namespace BookstackApi.Data.Models
 {
     public class Book
     {
