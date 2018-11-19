@@ -1,11 +1,10 @@
-﻿using System;
+﻿using BookstackApi.Data.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BookstackApi.Models
 {
-    public class BookModel
+    public class Book
     {
         public int Id { get; set; }
         public DateTime Created { get; set; }
@@ -17,7 +16,10 @@ namespace BookstackApi.Models
         public string BookReview { get; set; }
         // Book rating
         public int BookRating { get; set; }
+
         // List of comments
-        public virtual IEnumerable<CommentModel> ListComments { get; set; }
+        public virtual IEnumerable<BookComment> ListComments { get; set; }
+        // List of Tags
+        public virtual IEnumerable<BookTag> BookTags { get; set; }
     }
 }

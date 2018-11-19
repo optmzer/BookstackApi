@@ -1,6 +1,6 @@
-﻿using BookstackApi.Models;
+﻿using BookstackApi.Data.Models;
+using BookstackApi.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace BookstackApi.Data
 {
@@ -11,7 +11,8 @@ namespace BookstackApi.Data
 
         }
 
-        public DbSet<BookModel> Book { get; set; }
-        public DbSet<CommentModel> BookComments { get; set; }
+        public DbSet<Book> Book { get; set; }
+        public DbSet<BookComment> BookComments { get; set; }
+        public DbSet<BookTag> BookTags { get; set; }
     }
 }
