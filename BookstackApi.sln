@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookstackApi", "BookstackApi\BookstackApi.csproj", "{5374A9FA-BC8D-4B2E-A7ED-A172AC49052D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookstackApi.Data", "BookstackApi.Data\BookstackApi.Data.csproj", "{CBDCAD9F-02CE-4A19-A375-4A3F2A494A47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5374A9FA-BC8D-4B2E-A7ED-A172AC49052D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5374A9FA-BC8D-4B2E-A7ED-A172AC49052D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5374A9FA-BC8D-4B2E-A7ED-A172AC49052D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBDCAD9F-02CE-4A19-A375-4A3F2A494A47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBDCAD9F-02CE-4A19-A375-4A3F2A494A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBDCAD9F-02CE-4A19-A375-4A3F2A494A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBDCAD9F-02CE-4A19-A375-4A3F2A494A47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
