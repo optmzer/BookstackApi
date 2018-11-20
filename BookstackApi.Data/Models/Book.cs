@@ -7,15 +7,15 @@ namespace BookstackApi.Data.Models
     public class Book
     {
         public int Id { get; set; }
-        public DateTime Created { get; set; }
-        public string CoverUrl { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public int YearPublished { get; set; }
-        public string ISBN { get; set; }
-        public string BookReview { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
+        public string CoverUrl { get; set; } = "defaultCover";
+        public string Title { get; set; } = "unknown";
+        public string Author { get; set; } = "unknown";
+        public int YearPublished { get; set; } = 0;
+        public string ISBN { get; set; } = "unknown";
+        public string BookReview { get; set; } = "Author of the post did not write any reviews";
         // Book rating
-        public int BookRating { get; set; }
+        public int BookRating { get; set; } = 0;
 
         // List of comments
         public virtual IEnumerable<BookComment> ListComments { get; set; }
