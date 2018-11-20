@@ -25,7 +25,9 @@ namespace BookstackApi.Controllers
         [HttpGet]
         public IEnumerable<Book> GetBook()
         {
-            return _context.Book;
+            return _context.Book
+                .Include(book => book.BookTags)
+                .Include(book => book.ListComments);
         }
 
         // GET: api/Books/5

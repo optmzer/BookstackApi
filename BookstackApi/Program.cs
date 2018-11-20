@@ -24,7 +24,6 @@ namespace BookstackApi
                 {
                     var context = services.GetRequiredService<BookstackApiDdContext>();
                     context.Database.Migrate();
-
                     SeedBookData.Initialize(services);
                 }
                 catch (Exception ex)
