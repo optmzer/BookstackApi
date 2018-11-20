@@ -30,6 +30,8 @@ namespace BookstackApi
             services.AddScoped<IBook, BookstackService>();
             // Register IBookComment and BookCommentService
             services.AddScoped<IBookComment, BookCommentService>();
+            // Register IBookTag and BookTagService
+            services.AddScoped<IBookTag, BookTagService>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>

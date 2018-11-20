@@ -27,15 +27,15 @@ namespace BookstackApi.Controllers
         }
 
         // GET: api/BookComments/5
-        [HttpGet("{id}")]
-        public IActionResult GetBookComment([FromRoute] int id)
+        [HttpGet("{commentId}")]
+        public IActionResult GetBookComment([FromRoute] int commentId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var bookComment = _bookCommentService.GetByBookId(id);
+            var bookComment = _bookCommentService.GetByBookId(commentId);
 
             if (bookComment == null)
             {
@@ -46,15 +46,15 @@ namespace BookstackApi.Controllers
         }
 
         // PUT: api/BookComments/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBookComment([FromRoute] int id, [FromBody] BookComment bookComment)
+        [HttpPut("{commentId}")]
+        public async Task<IActionResult> PutBookComment([FromRoute] int commentId, [FromBody] BookComment bookComment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != bookComment.Id)
+            if (commentId != bookComment.Id)
             {
                 return BadRequest();
             }
@@ -65,7 +65,7 @@ namespace BookstackApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_bookCommentService.CommentExist(id))
+                if (!_bookCommentService.CommentExist(commentId))
                 {
                     return NotFound();
                 }
@@ -78,30 +78,30 @@ namespace BookstackApi.Controllers
             return NoContent();
         }
 
-        // POST: api/BookComments/5
-        [HttpPost("{id}")]
-        public async Task<IActionResult> PostBookComment([FromRoute] int id, [FromBody] BookComment bookComment)
+        // POST: api/BookComments/{int bookId}
+        [HttpPost("{bookId}")]
+        public async Task<IActionResult> PostBookComment([FromRoute] int bookId, [FromBody] BookComment bookComment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _bookCommentService.AddBookCommentAsync(id, bookComment);
+            await _bookCommentService.AddBookCommentAsync(bookId, bookComment);
 
-            return CreatedAtAction("GetBookComment", new { id = bookComment.Id }, bookComment);
+            return CreatedAtAction("GetBookComment", new { commentId = bookComment.Id }, bookComment);
         }
 
-        // DELETE: api/BookComments/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBookComment([FromRoute] int id)
+        // DELETE: api/BookComments/{int commentId}
+        [HttpDelete("{commentId}")]
+        public async Task<IActionResult> DeleteBookComment([FromRoute] int commentId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var bookComment = await _bookCommentService.GetCommentById(id);
+            var bookComment = await _bookCommentService.GetCommentById(commentId);
             if (bookComment == null)
             {
                 return NotFound();

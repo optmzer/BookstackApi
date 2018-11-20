@@ -40,9 +40,6 @@ namespace BookstackApi.Services
             result.Add(comment);
 
             book.ListComments = result;
-            //_context.Entry(book).State = EntityState.Modified;
-            //_context.Entry(comments).State = EntityState.Modified;
-            //_context.Add(comment);
             await _context.SaveChangesAsync();
         }
 

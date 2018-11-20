@@ -14,12 +14,10 @@ namespace BookstackApi.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        //private readonly BookstackApiDdContext _context;
         private readonly IBook _bookService;
 
-        public BooksController(BookstackApiDdContext context, IBook bookService)
+        public BooksController(IBook bookService)
         {
-            //_context = context;
             _bookService = bookService;
         }
 
@@ -31,15 +29,15 @@ namespace BookstackApi.Controllers
         }
 
         // GET: api/Books/5
-        [HttpGet("{id}")]
-        public IActionResult GetBook([FromRoute] int id)
+        [HttpGet("{bookId}")]
+        public IActionResult GetBook([FromRoute] int bookId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var book = _bookService.GetByIdAsync(id);
+            var book = _bookService.GetByIdAsync(bookId);
 
             if (book == null)
             {
@@ -50,20 +48,20 @@ namespace BookstackApi.Controllers
         }
 
         // PUT: api/Books/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBook([FromRoute] int id, [FromBody] Book book)
+        [HttpPut("{bookId}")]
+        public async Task<IActionResult> PutBook([FromRoute] int bookId, [FromBody] Book book)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != book.Id)
+            if (bookId != book.Id)
             {
                 return BadRequest();
             }
 
-            var bookExists = _bookService.BookExists(id);
+            var bookExists = _bookService.BookExists(bookId);
 
             try
             {
@@ -99,15 +97,15 @@ namespace BookstackApi.Controllers
         }
 
         // DELETE: api/Books/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBook([FromRoute] int id)
+        [HttpDelete("{bookId}")]
+        public async Task<IActionResult> DeleteBook([FromRoute] int bookId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var book = await _bookService.GetByIdAsync(id);
+            var book = await _bookService.GetByIdAsync(bookId);
 
             if (book == null)
             {
@@ -118,7 +116,6 @@ namespace BookstackApi.Controllers
 
             return Ok(book);
         }
-
         
     }
 }
