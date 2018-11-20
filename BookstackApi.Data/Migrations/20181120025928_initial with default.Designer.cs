@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookstackApi.Data.Migrations
 {
     [DbContext(typeof(BookstackApiDdContext))]
-    [Migration("20181119074552_initial migration")]
-    partial class initialmigration
+    [Migration("20181120025928_initial with default")]
+    partial class initialwithdefault
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,23 +18,7 @@ namespace BookstackApi.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024");
 
-            modelBuilder.Entity("BookstackApi.Data.Models.BookTag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("BookId");
-
-                    b.Property<string>("Description");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("BookTags");
-                });
-
-            modelBuilder.Entity("BookstackApi.Models.Book", b =>
+            modelBuilder.Entity("BookstackApi.Data.Models.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -60,7 +44,7 @@ namespace BookstackApi.Data.Migrations
                     b.ToTable("Book");
                 });
 
-            modelBuilder.Entity("BookstackApi.Models.BookComment", b =>
+            modelBuilder.Entity("BookstackApi.Data.Models.BookComment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -82,16 +66,34 @@ namespace BookstackApi.Data.Migrations
 
             modelBuilder.Entity("BookstackApi.Data.Models.BookTag", b =>
                 {
-                    b.HasOne("BookstackApi.Models.Book")
-                        .WithMany("BookTags")
-                        .HasForeignKey("BookId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("BookId");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookTags");
                 });
 
-            modelBuilder.Entity("BookstackApi.Models.BookComment", b =>
+            modelBuilder.Entity("BookstackApi.Data.Models.BookComment", b =>
                 {
-                    b.HasOne("BookstackApi.Models.Book")
+                    b.HasOne("BookstackApi.Data.Models.Book")
                         .WithMany("ListComments")
-                        .HasForeignKey("BookId");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BookstackApi.Data.Models.BookTag", b =>
+                {
+                    b.HasOne("BookstackApi.Data.Models.Book")
+                        .WithMany("BookTags")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

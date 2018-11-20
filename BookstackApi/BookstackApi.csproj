@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookstackApi.Data\BookstackApi.Data.csproj" />
+    <ProjectReference Include="..\BookstackApi.Services\BookstackApi.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -36,6 +36,12 @@ namespace BookstackApi.Services
                 .Where(book => book.BookTags.Any(tags => tags.Description == tag));
         }
 
+
+        public void DeleteBook(int bookId)
+        {
+
+        }
+
         /**
          * Creates a reference to the image in SQL database
          */
