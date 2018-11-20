@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BookstackApi.Data.Models
 {
-    class SeedBookData
+    public class SeedBookData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
@@ -20,20 +20,32 @@ namespace BookstackApi.Data.Models
                 }
 
                 // Create a list of comments
-                var bookComments = new List<BookComment>();
-                bookComments.Add(new BookComment
-                {
-                    Author = "John Doe",
-                    Content = "This is very good book.",
-                    Created = DateTime.Now
-                });
+                var bookComments = new List<BookComment>() {
+                    new BookComment
+                    {
+                        Author = "John Doe",
+                        Content = "This is very good book.",
+                        Created = DateTime.Now
+                    },
+                    new BookComment
+                    {
+                        Author = "Silvia Doe",
+                        Content = "Great beginners book",
+                        Created = DateTime.Now
+                    }
+                };
                     
                 // Create a list of tags
-                var bookTags = new List<BookTag>();
-                bookTags.Add(new BookTag
-                {
-                    Description = "#programming"
-                });
+                var bookTags = new List<BookTag>() {
+                    new BookTag
+                    {
+                        Description = "#programming"
+                    },
+                    new BookTag
+                    {
+                        Description = "#programming"
+                    }
+                };
 
                 context.Book.AddRange(
                     new Book
