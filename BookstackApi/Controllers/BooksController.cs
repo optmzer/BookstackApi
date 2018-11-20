@@ -67,7 +67,7 @@ namespace BookstackApi.Controllers
 
             try
             {
-                await _bookService.EditBookAsync(id, book);
+                await _bookService.EditBookAsync(book);
             }
             catch (DbUpdateConcurrencyException)
             {

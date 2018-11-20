@@ -70,7 +70,7 @@ namespace BookstackApi.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task EditBookAsync(int bookId, Book book)
+        public async Task EditBookAsync(Book book)
         {
             _context.Entry(book).State = EntityState.Modified;
                 await _context.SaveChangesAsync();

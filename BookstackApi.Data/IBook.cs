@@ -8,6 +8,8 @@ namespace BookstackApi.Data
     {
         // TODO: Add 
         // IEnumerable<Book> GetByTag(string tag);
+        // IEnumerable<Book> GetByAuthor(string tag);
+        // IEnumerable<Book> GetByTitle(string tag);
         bool BookExists(int id);
         Task<Book> GetByIdAsync(int bookId);
         IEnumerable<Book> GetAll();
@@ -16,6 +18,6 @@ namespace BookstackApi.Data
 
         Task AddBookAsync(Book book);
         Task DeleteBookAsync(Book book);
-        Task EditBookAsync(int bookId, Book book);
+        Task EditBookAsync(Book book);
     }
 }
