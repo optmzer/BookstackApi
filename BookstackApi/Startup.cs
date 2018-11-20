@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace BookstackApi
 {
@@ -24,7 +25,11 @@ namespace BookstackApi
             // Add Sqlite db
             services.AddDbContext<BookstackApiDdContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Bookstack", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +46,17 @@ namespace BookstackApi
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookstackAPI V1");
+                c.RoutePrefix = string.Empty; // launch swagger from root
+            });
         }
     }
 }
