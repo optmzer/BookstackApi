@@ -1,4 +1,5 @@
 ﻿using BookstackApi.Data;
+using BookstackApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,8 @@ namespace BookstackApi
             // Add Sqlite db
             services.AddDbContext<BookstackApiDdContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            // Register IBook and BookService
+            services.AddScoped<IBook, BookstackService>();
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {

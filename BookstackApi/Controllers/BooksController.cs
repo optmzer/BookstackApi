@@ -14,32 +14,32 @@ namespace BookstackApi.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly BookstackApiDdContext _context;
+        //private readonly BookstackApiDdContext _context;
+        private readonly IBook _bookService;
 
-        public BooksController(BookstackApiDdContext context)
+        public BooksController(BookstackApiDdContext context, IBook bookService)
         {
-            _context = context;
+            //_context = context;
+            _bookService = bookService;
         }
 
         // GET: api/Books
         [HttpGet]
         public IEnumerable<Book> GetBook()
         {
-            return _context.Book
-                .Include(book => book.BookTags)
-                .Include(book => book.ListComments);
+            return _bookService.GetAll();
         }
 
         // GET: api/Books/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBook([FromRoute] int id)
+        public IActionResult GetBook([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var book = await _context.Book.FindAsync(id);
+            var book = _bookService.GetByIdAsync(id);
 
             if (book == null)
             {
@@ -63,15 +63,15 @@ namespace BookstackApi.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(book).State = EntityState.Modified;
+            var bookExists = _bookService.BookExists(id);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _bookService.EditBookAsync(id, book);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BookExists(id))
+                if (!bookExists)
                 {
                     return NotFound();
                 }
@@ -93,8 +93,7 @@ namespace BookstackApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Book.Add(book);
-            await _context.SaveChangesAsync();
+            await _bookService.AddBookAsync(book);
 
             return CreatedAtAction("GetBook", new { id = book.Id }, book);
         }
@@ -108,21 +107,18 @@ namespace BookstackApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var book = await _context.Book.FindAsync(id);
+            var book = await _bookService.GetByIdAsync(id);
+
             if (book == null)
             {
                 return NotFound();
             }
 
-            _context.Book.Remove(book);
-            await _context.SaveChangesAsync();
+            await _bookService.DeleteBookAsync(book);
 
             return Ok(book);
         }
 
-        private bool BookExists(int id)
-        {
-            return _context.Book.Any(e => e.Id == id);
-        }
+        
     }
 }

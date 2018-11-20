@@ -24,10 +24,12 @@ namespace BookstackApi.Services
                 .Include(book => book.ListComments);
         }
 
-        public Book GetById(int bookId)
+        public async Task<Book> GetByIdAsync(int bookId)
         {
-            return GetAll().Where(book => book.Id == bookId)
-                .First();
+            return await _context.Book.FindAsync(bookId);
+            
+            //return GetAll().Where(book => book.Id == bookId)
+            //    .First();
         }
 
         public IEnumerable<Book> GetByTag(string tag)
@@ -36,29 +38,47 @@ namespace BookstackApi.Services
                 .Where(book => book.BookTags.Any(tags => tags.Description == tag));
         }
 
-
-        public void DeleteBook(int bookId)
-        {
-
-        }
-
         /**
          * Creates a reference to the image in SQL database
          */
-        public async Task SetBook(Book book)
+        public async Task AddBookAsync(Book book)
         {
             //init tags if they are null
             if (book.BookTags == null)
             {
                 book.BookTags = new List<BookTag>() {
                     new BookTag {
-                        Description = "add tags"
+                        Description = "add tags..."
                     }
                 };
             }
 
             _context.Add(book);
             await _context.SaveChangesAsync();
+        }
+
+        public IEnumerable<Book> GetLatest(int numberOfBooks)
+        {
+            return GetAll()
+                .OrderByDescending(book => book.Created)
+                .Take(numberOfBooks);
+        }
+
+        public async Task DeleteBookAsync(Book book)
+        {
+            _context.Book.Remove(book);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task EditBookAsync(int bookId, Book book)
+        {
+            _context.Entry(book).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+        }
+
+        public bool BookExists(int id)
+        {
+            return _context.Book.Any(e => e.Id == id);
         }
 
         public List<BookTag> ParseTags(string tags)
