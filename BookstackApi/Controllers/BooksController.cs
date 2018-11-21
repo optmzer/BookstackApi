@@ -37,7 +37,7 @@ namespace BookstackApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var book = _bookService.GetByIdAsync(bookId);
+            var book = _bookService.GetById(bookId);
 
             if (book == null)
             {
@@ -105,7 +105,7 @@ namespace BookstackApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var book = await _bookService.GetByIdAsync(bookId);
+            var book = _bookService.GetById(bookId);
 
             if (book == null)
             {

@@ -27,15 +27,15 @@ namespace BookstackApi.Controllers
         }
 
         // GET: api/BookComments/5
-        [HttpGet("{commentId}")]
-        public IActionResult GetBookComment([FromRoute] int commentId)
+        [HttpGet("{bookId}")]
+        public IActionResult GetBookComments([FromRoute] int bookId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var bookComment = _bookCommentService.GetByBookId(commentId);
+            var bookComment = _bookCommentService.GetByBookId(bookId);
 
             if (bookComment == null)
             {
@@ -45,6 +45,24 @@ namespace BookstackApi.Controllers
             return Ok(bookComment);
         }
 
+        // GET: api/BookComments/Comment5
+        [HttpGet("Comment/{commentId}")]
+        public IActionResult GetBookComment([FromRoute] int commentId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var bookComment = _bookCommentService.GetCommentById(commentId);
+
+            if (bookComment == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(bookComment);
+        }
         // PUT: api/BookComments/5
         [HttpPut("{commentId}")]
         public async Task<IActionResult> PutBookComment([FromRoute] int commentId, [FromBody] BookComment bookComment)

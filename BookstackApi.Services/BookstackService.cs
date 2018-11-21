@@ -24,12 +24,14 @@ namespace BookstackApi.Services
                 .Include(book => book.ListComments);
         }
 
-        public async Task<Book> GetByIdAsync(int bookId)
+        public Book GetById(int bookId)
         {
-            return await _context.Book.FindAsync(bookId);
-            
-            //return GetAll().Where(book => book.Id == bookId)
-            //    .First();
+            //var book = await _context.Book.FindAsync(bookId);
+            //return book.Include(b => b.ListComments);
+
+            return GetAll()
+                .Where(book => book.Id == bookId)
+                .FirstOrDefault();
         }
 
         public IEnumerable<Book> GetByTag(string tag)

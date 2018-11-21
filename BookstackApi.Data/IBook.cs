@@ -11,7 +11,7 @@ namespace BookstackApi.Data
         // IEnumerable<Book> GetByAuthor(string tag);
         // IEnumerable<Book> GetByTitle(string tag);
         bool BookExists(int id);
-        Task<Book> GetByIdAsync(int bookId);
+        Book GetById(int bookId);
         IEnumerable<Book> GetAll();
         IEnumerable<Book> GetLatest(int numberOfBooks);
         IEnumerable<Book> GetByTag(string tag);
