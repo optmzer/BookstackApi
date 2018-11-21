@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookstackApi.Data;
@@ -20,11 +19,12 @@ namespace BookstackApi.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBook _bookService;
-        private IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public BooksController(IBook bookService, IConfiguration configuration)
         {
             _bookService = bookService;
+            _configuration = configuration;
         }
 
         // GET: api/Books
