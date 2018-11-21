@@ -125,6 +125,7 @@ namespace BookstackApi.Controllers
                     Book bookItem = new Book()
                     {
                         Created = DateTime.Now,
+                        Title = book.Title,
                         CoverUrl = cloudBlock.SnapshotQualifiedUri.AbsoluteUri,
                         Author = book.Author,
                         ISBN = book.ISBN,
@@ -148,14 +149,14 @@ namespace BookstackApi.Controllers
         private async Task<CloudBlockBlob> UploadToBlob(string filename, byte[] imageBuffer = null, System.IO.Stream stream = null)
         {
 
-            var accountName = _configuration["AzureBlob:name"];
-            var accountKey = _configuration["AzureBlob:key"]; ;
+            var accountName = _configuration["AzureBlob:ACCOUNT_NAME"];
+            var accountKey = _configuration["AzureBlob:ACCOUNT_KEY"]; ;
             var storageAccount = new CloudStorageAccount(new StorageCredentials(accountName, accountKey), true);
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
             CloudBlobContainer imagesContainer = blobClient.GetContainerReference("images");
 
-            string storageConnectionString = _configuration["AzureBlob:connectionString"];
+            string storageConnectionString = _configuration["AzureBlob:CONNECTION_STRING"];
 
             // Check whether the connection string can be parsed.
             if (CloudStorageAccount.TryParse(storageConnectionString, out storageAccount))
