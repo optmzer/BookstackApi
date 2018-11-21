@@ -15,6 +15,7 @@ namespace BookstackApi.Data
         IEnumerable<Book> GetAll();
         IEnumerable<Book> GetLatest(int numberOfBooks);
         IEnumerable<Book> GetByTag(string tag);
+        List<BookTag> ParseTags(string tags);
 
         Task AddBookAsync(Book book);
         Task DeleteBookAsync(Book book);
