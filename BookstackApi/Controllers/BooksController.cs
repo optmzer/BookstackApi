@@ -57,14 +57,10 @@ namespace BookstackApi.Controllers
         [HttpGet, Route("Search/{title}")]
         public IActionResult GetBookByTitle([FromRoute] string title)
         {
-            if(title == "" || title == null)
-            {
-                return RedirectToAction("GetBook");
-            }
-
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return RedirectToAction("GetBook");
+                //return BadRequest(ModelState);
             }
 
             var book = _bookService.GetByTitle(title);
