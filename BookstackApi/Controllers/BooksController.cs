@@ -36,7 +36,7 @@ namespace BookstackApi.Controllers
 
         // GET: api/Books/5
         [HttpGet("{bookId}")]
-        public IActionResult GetBook([FromRoute] int bookId)
+        public IActionResult GetBookById([FromRoute] int bookId)
         {
             if (!ModelState.IsValid)
             {
