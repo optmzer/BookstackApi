@@ -7,9 +7,8 @@ namespace BookstackApi.Data
     public interface IBook
     {
         // TODO: Add 
-        // IEnumerable<Book> GetByTag(string tag);
         // IEnumerable<Book> GetByAuthor(string tag);
-        // IEnumerable<Book> GetByTitle(string tag);
+        IEnumerable<Book> GetByTitle(string title);
         bool BookExists(int id);
         Book GetById(int bookId);
         IEnumerable<Book> GetAll();

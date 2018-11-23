@@ -53,6 +53,25 @@ namespace BookstackApi.Controllers
             return Ok(book);
         }
 
+        // GET: api/Books/Search/:title
+        [HttpGet, Route("Search/{title}")]
+        public IActionResult GetBook([FromRoute] string title)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var book = _bookService.GetByTitle(title);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(book);
+        }
+
         // PUT: api/Books/5
         [HttpPut("{bookId}")]
         public async Task<IActionResult> PutBook([FromRoute] int bookId, [FromBody] Book book)
@@ -88,19 +107,6 @@ namespace BookstackApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Books
-        //[HttpPost]
-        //public async Task<IActionResult> PostBook([FromBody] Book book)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    await _bookService.AddBookAsync(book);
-
-        //    return CreatedAtAction("GetBook", new { id = book.Id }, book);
-        //}
 
         [HttpPost, Route("upload")]
         public async Task<IActionResult> UploadFile([FromForm]BookForm book)

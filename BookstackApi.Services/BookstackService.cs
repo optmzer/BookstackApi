@@ -89,6 +89,12 @@ namespace BookstackApi.Services
             {
                 Description = tag
             }).ToList();
+        }   
+
+        public IEnumerable<Book> GetByTitle(string title)
+        {
+            return GetAll()
+                .Where(book => book.Title.ToLower().Contains(title.ToLower()));
         }
     }
 }
